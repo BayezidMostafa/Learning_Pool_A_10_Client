@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { getAuth, onAuthStateChanged, signInWithPopup } from 'firebase/auth';
-import app from '../firebase/firebase.confiq';
+import app from '../firebase/firebase.config';
 
 const auth = getAuth(app);
 export const AuthContext = createContext();
