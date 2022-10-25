@@ -51,7 +51,7 @@ const SignUp = () => {
                     </div>
                     <div className="space-y-2">
                         <label htmlFor="photoURL" className="block text-sm">Photo URL</label>
-                        <input type="text" name="photoURL" id="PhotoURL" placeholder="Photo URL" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
+                        <input type="text" name="photoURL" id="PhotoURL" placeholder="Photo URL" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <div className="space-y-2">
                         <label htmlFor="email" className="block text-sm">Email address</label>
