@@ -60,7 +60,7 @@ const NavBar = () => {
                     <ul className="items-center hidden space-x-8 lg:flex">
                         <li>
                             <Link
-                                to=""
+                                to="/login"
                                 aria-label="Sign in"
                                 title="Sign in"
                                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
