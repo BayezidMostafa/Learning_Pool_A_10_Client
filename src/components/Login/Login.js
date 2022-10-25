@@ -1,9 +1,10 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthSource';
 
 const Login = () => {
+    const [error, setError] = useState('');
 
     const {providerLogIn} = useContext(AuthContext)
 
@@ -16,6 +17,9 @@ const Login = () => {
             const user = result.user;
             console.log(user);
         })
+        .catch(error => {
+            setError(error);
+        })
     }
     const handleGithubLogIn = () => {
         providerLogIn(githubProvider)
@@ -23,13 +27,15 @@ const Login = () => {
             const user = result.user;
             console.log(user);
         })
+        .catch(error => {
+            setError(error);
+        })
     }
 
     return (
         <div className="w-full max-w-md p-4  shadow sm:p-8 dark:bg-gray-900 dark:text-gray-100 mx-auto sm:rounded-md sm:mt-5 md:mt-10">
             <h2 className="mb-3 text-3xl font-semibold text-center">Login to your account</h2>
-            <p className="text-sm text-center dark:text-gray-400">Don't have account?
-                <Link href="#" rel="noopener noreferrer" className="focus:underline hover:underline">Sign up here</Link>
+            <p className="text-sm text-center dark:text-gray-400">Don't have account? <Link to='/signup' rel="noopener noreferrer" className="focus:underline hover:underline">Sign up here</Link>
             </p>
             <div className="my-6 space-y-4">
                 <button onClick={handleGoogleLogIn} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400">
@@ -54,17 +60,20 @@ const Login = () => {
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <label htmlFor="email" className="block text-sm">Email address</label>
-                        <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <input type="email" name="email" id="email" placeholder="example@mail.com" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required     />
                     </div>
                     <div className="space-y-2">
                         <div className="flex justify-between">
                             <label htmlFor="password" className="text-sm">Password</label>
                             <Link rel="noopener noreferrer" href="#" className="text-xs hover:underline dark:text-gray-400">Forgot password?</Link>
                         </div>
-                        <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
                     </div>
                 </div>
-                <button type="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Sign in</button>
+                <div>
+                    <label htmlFor="">{error}</label>
+                </div>
+                <button type="form" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Sign in</button>
             </form>
         </div>
     );
