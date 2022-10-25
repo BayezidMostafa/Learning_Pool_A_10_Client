@@ -2,7 +2,9 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthSource';
 import { HiUserCircle } from "react-icons/hi";
-import Logo from '../../logo.png'
+import Logo from '../../logo.png';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -70,14 +72,25 @@ const NavBar = () => {
                         {
                             user?.uid ?
                                 <>
-                                    
+
                                     <>
                                         {
-                                            user?.photoURL ? <><img src={user.photoURL} alt="" /></> : <><HiUserCircle className='text-5xl text-gray-300'/></>
-                            
+                                            user?.photoURL ?
+                                                <>
+                                                    <Tippy content={user.displayName}>
+                                                        <img src={user.photoURL} className="w-12 rounded-full" id="profile-img" alt="" />
+                                                    </Tippy>
+                                                </>
+                                                :
+                                                <>
+                                                    <Tippy content={user.displayName}>
+                                                        <HiUserCircle className='text-5xl text-gray-300' />
+                                                    </Tippy>
+                                                </>
+
                                         }
                                     </>
-                                    
+
                                     <li>
                                         <Link
                                             onClick={handleSignOut}
