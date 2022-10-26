@@ -78,7 +78,7 @@ const NavBar = () => {
                                             user?.photoURL ?
                                                 <>
                                                     <Tippy content={user.displayName}>
-                                                        <img src={user.photoURL} className="w-12 rounded-full" id="profile-img" alt="" />
+                                                        <img src={user.photoURL} className="w-12 rounded-full" alt="" />
                                                     </Tippy>
                                                 </>
                                                 :
@@ -127,6 +127,17 @@ const NavBar = () => {
                                     </li>
                                 </>
                         }
+                        <div>
+                            <label htmlFor="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100">
+                                <span>Light</span>
+                                <span className="relative">
+                                    <input id="Toggle1" type="checkbox" className="hidden peer" />
+                                    <div className="w-10 h-6 rounded-full shadow-inner dark:bg-gray-400 peer-checked:dark:bg-gray-900 border"></div>
+                                    <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto dark:bg-gray-100"></div>
+                                </span>
+                                <span>Dark</span>
+                            </label>
+                        </div>
                     </ul>
                     <div className="lg:hidden">
                         <button
@@ -215,26 +226,66 @@ const NavBar = () => {
                                                     Blog
                                                 </Link>
                                             </li>
-                                            <li>
-                                                <Link
-                                                    to="/login"
-                                                    aria-label="Sign in"
-                                                    title="Sign in"
-                                                    className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                                                >
-                                                    Sign in
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link
-                                                    to="signup"
-                                                    className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                                    aria-label="Sign up"
-                                                    title="Sign up"
-                                                >
-                                                    Sign up
-                                                </Link>
-                                            </li>
+                                            {
+                                                user?.uid ?
+                                                    <>
+                                                        <>
+
+                                                            <>
+                                                                {
+                                                                    user?.photoURL ?
+                                                                        <>
+                                                                            <Tippy content={user.displayName}>
+                                                                                <img src={user.photoURL} className="w-12 rounded-full" alt="" />
+                                                                            </Tippy>
+                                                                        </>
+                                                                        :
+                                                                        <>
+                                                                            <Tippy content={user.displayName}>
+                                                                                <HiUserCircle className='text-5xl text-gray-300' />
+                                                                            </Tippy>
+                                                                        </>
+
+                                                                }
+                                                            </>
+
+                                                            <li>
+                                                                <Link
+                                                                    onClick={handleSignOut}
+                                                                    to="/"
+                                                                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-gray-900 hover:bg-gray-800"
+                                                                    aria-label="Sign out"
+                                                                    title="Sign out"
+                                                                >
+                                                                    Sign out
+                                                                </Link>
+                                                            </li>
+                                                        </>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <li>
+                                                            <Link
+                                                                to="/login"
+                                                                aria-label="Sign in"
+                                                                title="Sign in"
+                                                                className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                                                            >
+                                                                Sign in
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link
+                                                                to="signup"
+                                                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                                                                aria-label="Sign up"
+                                                                title="Sign up"
+                                                            >
+                                                                Sign up
+                                                            </Link>
+                                                        </li>
+                                                    </>
+                                            }
                                         </ul>
                                     </nav>
                                 </div>
