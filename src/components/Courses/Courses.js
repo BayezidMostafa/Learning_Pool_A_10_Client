@@ -6,11 +6,13 @@ import SideBar from '../SideBar/SideBar';
 const Courses = () => {
     const courses = useLoaderData();
     return (
-        <div className='flex'>
-            <div className='w-[10%]'>
-                <SideBar courses={courses} />
+        <div className='grid grid-cols-1 md:grid-cols-4 container mx-auto gap-8 my-10'>
+            <div className='md:col-span-1'>
+                {
+                    courses.map(course => <SideBar key={course.id} course={course}/>)
+                }
             </div>
-            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:px-10 md:mt-10 container mx-auto'>
+            <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:col-span-3'>
                 {
                     courses.map(singleCourse => <Course key={singleCourse.id} singleCourse={singleCourse} />)
                 }

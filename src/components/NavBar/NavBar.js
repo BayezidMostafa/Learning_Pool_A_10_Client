@@ -1,10 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthSource';
-import { HiUserCircle } from "react-icons/hi";
 import Logo from '../../logo.png';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
+import { Button, Switch, Tooltip } from "@material-tailwind/react";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -19,7 +17,7 @@ const NavBar = () => {
     }
 
     return (
-        <div className="bg-black">
+        <div className="bg-white bg-opacity-5">
             <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 back">
                 <div className="relative flex items-center justify-between">
                     <div className="flex items-center">
@@ -42,7 +40,7 @@ const NavBar = () => {
                                     to="/courses"
                                     aria-label="Our Courses"
                                     title="Our Courses"
-                                    className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                                    className="font-medium hover:text-gray-400 tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                                 >
                                     Courses
                                 </Link>
@@ -52,7 +50,7 @@ const NavBar = () => {
                                     to="/faq"
                                     aria-label="FAQ"
                                     title="FAQ"
-                                    className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                                    className="font-medium hover:text-gray-400 tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                                 >
                                     FAQ
                                 </Link>
@@ -62,7 +60,7 @@ const NavBar = () => {
                                     to="/blog"
                                     aria-label="Blog"
                                     title="Blog"
-                                    className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                                    className="font-medium hover:text-gray-400 tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                                 >
                                     Blog
                                 </Link>
@@ -77,17 +75,19 @@ const NavBar = () => {
 
                                     <>
                                         {
-                                            user.photoURL ?
+                                            user?.photoURL ?
                                                 <>
-                                                    <Tippy content={user.displayName}>
-                                                        <img src={user.photoURL} className="w-12 rounded-full" alt="" />
-                                                    </Tippy>
+                                                    {/* User's Logo Over Here */}
+                                                    <Tooltip content={user?.displayName}>
+                                                        <img src={user?.photoURL} className="w-12 h-12 rounded-full" alt="" />
+                                                    </Tooltip>
                                                 </>
                                                 :
                                                 <>
-                                                    <Tippy content={user.displayName}>
-                                                        <HiUserCircle className='text-5xl text-gray-300 rounded-full' alt="" />
-                                                    </Tippy>
+                                                    {/* Default Logo Here */}
+                                                    <Tooltip content={user?.displayName}>
+                                                        <div className='bg-white w-12 h-12 rounded-full flex justify-center items-center'><p>User</p></div>
+                                                    </Tooltip>
                                                 </>
 
                                         }
@@ -97,11 +97,11 @@ const NavBar = () => {
                                         <Link
                                             onClick={handleSignOut}
                                             to="/"
-                                            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-gray-900 hover:bg-gray-800"
+                                            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200"
                                             aria-label="Sign out"
                                             title="Sign out"
                                         >
-                                            Sign out
+                                            <Button variant="gradient" className='bg-white bg-opacity-10 hover:bg-opacity-5'>Sign out</Button>
                                         </Link>
                                     </li>
                                 </>
@@ -114,18 +114,18 @@ const NavBar = () => {
                                             title="Sign in"
                                             className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                                         >
-                                            Sign in
+                                            <Button variant="gradient" className='bg-white bg-opacity-10 hover:bg-opacity-5'>Sign in</Button>
                                         </Link>
                                     </li>
                                 </>
                         }
                         <div>
-                            <label htmlFor="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100">
+                            <label htmlFor="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer text-gray-100">
                                 <span>Light</span>
                                 <span className="relative">
                                     <input id="Toggle1" type="checkbox" className="hidden peer" />
-                                    <div className="w-10 h-6 rounded-full shadow-inner dark:bg-gray-400 peer-checked:dark:bg-gray-900 border"></div>
-                                    <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto dark:bg-gray-100"></div>
+                                    <div className="w-10 h-6 rounded-full shadow-inner bg-gray-400 peer-checked:bg-gray-900 border"></div>
+                                    <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto bg-gray-100"></div>
                                 </span>
                                 <span>Dark</span>
                             </label>
@@ -155,7 +155,7 @@ const NavBar = () => {
                         </button>
                         {isMenuOpen && (
                             <div className="absolute top-0 left-0 w-full">
-                                <div className="p-5 bg-white border rounded shadow-sm">
+                                <div className="p-5 bg-white bg-opacity-95  border rounded shadow-sm">
                                     <div className="flex items-center justify-between mb-4">
                                         <div>
                                             <Link
@@ -218,8 +218,9 @@ const NavBar = () => {
                                                     Blog
                                                 </Link>
                                             </li>
+                                            <Switch id="auto-update" />
                                             {
-                                                user.uid ?
+                                                user?.uid ?
                                                     <>
                                                         <>
 
@@ -227,15 +228,15 @@ const NavBar = () => {
                                                                 {
                                                                     user?.photoURL ?
                                                                         <>
-                                                                            <Tippy content={user.displayName}>
-                                                                                <img src={user.photoURL} className="w-12 rounded-full" alt="" />
-                                                                            </Tippy>
+                                                                            <Tooltip content={user?.displayName}>
+                                                                                <img src={user?.photoURL} className="w-12 h-12 rounded-full" alt="" />
+                                                                            </Tooltip>
                                                                         </>
                                                                         :
                                                                         <>
-                                                                            <Tippy content={user.displayName}>
-                                                                                <HiUserCircle className='text-5xl text-gray-300 rounded-full' alt="" />
-                                                                            </Tippy>
+                                                                            <Tooltip content={user?.displayName}>
+                                                                                <div className='bg-white w-12 h-12 rounded-full flex justify-center items-center'><p>User</p></div>
+                                                                            </Tooltip>
                                                                         </>
 
                                                                 }
@@ -245,11 +246,11 @@ const NavBar = () => {
                                                                 <Link
                                                                     onClick={handleSignOut}
                                                                     to="/"
-                                                                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-gray-900 hover:bg-gray-800"
+                                                                    className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200"
                                                                     aria-label="Sign out"
                                                                     title="Sign out"
                                                                 >
-                                                                    Sign out
+                                                                    <Button variant="gradient" className='bg-black bg-opacity-20 hover:bg-opacity-5'>Sign out</Button>
                                                                 </Link>
                                                             </li>
                                                         </>
@@ -268,7 +269,9 @@ const NavBar = () => {
                                                         </li>
                                                     </>
                                             }
+                                            
                                         </ul>
+
                                     </nav>
                                 </div>
                             </div>
