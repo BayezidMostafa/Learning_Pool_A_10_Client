@@ -7,28 +7,34 @@ export const AuthContext = createContext();
 
 const AuthSource = ({ children }) => {
     const [user, setUser] = useState(null);
-    console.log(user);
+    const [loading, setLoading] = useState(true);
 
     const providerLogIn = provider => {
+        setLoading(true)
         return signInWithPopup(auth, provider);
     }
 
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
     const updateTheUser = (profile) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, profile);
     }
     const signInUser = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password);
     }
     const logOut = () => {
+        setLoading(true)
         return signOut(auth);
     }
     useEffect(() => { 
         const unsubscribe = onAuthStateChanged(auth, (currentUser)=>{
             setUser(currentUser);
+            setLoading(false)
         })
         return () => {
             unsubscribe();
@@ -41,7 +47,8 @@ const AuthSource = ({ children }) => {
         createUser,
         updateTheUser,
         signInUser,
-        logOut
+        logOut,
+        loading
     }
 
     return (

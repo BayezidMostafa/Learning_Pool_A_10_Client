@@ -1,35 +1,35 @@
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthSource';
 
 const Login = () => {
+    const { providerLogIn, signInUser } = useContext(AuthContext)
     const [error, setError] = useState('');
-
-    const {providerLogIn, signInUser} = useContext(AuthContext)
-
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/';
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
-
     const handleGoogleLogIn = () => {
         providerLogIn(googleProvider)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error => {
-            setError(error.message);
-        })
+            .then(result => {
+                const user = result.user;
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                setError(error.message);
+            })
     }
     const handleGithubLogIn = () => {
         providerLogIn(githubProvider)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-        })
-        .catch(error => {
-            setError(error.message);
-        })
+            .then(result => {
+                const user = result.user;
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                setError(error.message);
+            })
     }
     const handleSignIn = event => {
         event.preventDefault()
@@ -37,13 +37,13 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         signInUser(email, password)
-        .then(result => {
-            const user = result.user;
-            console.log(user);
-            form.reset();
-            setError('')
-        })
-        .catch(error => setError(error.message))
+            .then(result => {
+                const user = result.user;
+                form.reset();
+                setError('')
+                navigate(from, { replace: true })
+            })
+            .catch(error => setError(error.message))
     }
 
     return (
@@ -74,7 +74,7 @@ const Login = () => {
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <label htmlFor="email" className="block text-sm">Email address</label>
-                        <input type="email" name="email" id="email" placeholder="example@mail.com" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required     />
+                        <input type="email" name="email" id="email" placeholder="example@mail.com" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" required />
                     </div>
                     <div className="space-y-2">
                         <div className="flex justify-between">

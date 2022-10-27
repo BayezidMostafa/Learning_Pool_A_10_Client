@@ -4,8 +4,8 @@ import { Outlet } from 'react-router-dom';
 
 const Main = () => {
     return (
-        <div>
-            <NavBar />
+        <div className=''>
+            <NavBar className="" />
             <Outlet />
         </div>
     );

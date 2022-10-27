@@ -1,21 +1,27 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
-import { BiDownload } from "react-icons/bi";
+import { Link, useLoaderData } from 'react-router-dom';
+import ReactDOM from "react-dom";
+import Pdf from "react-to-pdf";
+const ref = React.createRef();
+
+const options = {
+    orientation: 'landscape',
+    unit: 'in',
+    format: [14, 10]
+};
 
 const CourseDetails = () => {
     const data = useLoaderData()
-    const { about, course_name, mentor, cover_thumb, duration, price } = data;
-    console.log(data);
+    const { about, course_name, cover_thumb, duration, price, id } = data;
 
-    const downloadHandler = () => {
-        console.log('clicked');
-    }
 
     return (
-        <div className="p-6 shadow-md dark:bg-gray-900 dark:text-gray-100 md:container mx-auto my-5 rounded-md">
+        <div ref={ref} className="p-6 shadow-md dark:bg-gray-900 dark:text-gray-100 md:container mx-auto my-5 rounded-md">
             <div className='flex justify-between mb-5 items-center'>
                 <p className='font-bold text-xl md:text-4xl'>{course_name}</p>
-                <BiDownload onClick={downloadHandler} className='text-3xl cursor-pointer' />
+                <Pdf targetRef={ref} filename="code-example.pdf" options={options} x={.5} y={.5} scale={0.8}>
+                    {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                </Pdf>
             </div>
             <div className="space-y-4">
                 <div className="space-y-2">
@@ -30,6 +36,7 @@ const CourseDetails = () => {
                     <p></p>
                 </div>
             </div>
+            <Link to={`/course/checkout/${id}`}><button className='bg-amber-600 rounded p-2 hover:bg-amber-700'>Get premium access</button></Link>
         </div>
     );
 };

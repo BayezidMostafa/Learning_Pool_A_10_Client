@@ -14,7 +14,6 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
         const confirm_password = form.confirm_password.value;
-        console.log(name, photoURL, email, password, confirm_password);
         if (password !== confirm_password) {
             return;
         }
@@ -23,7 +22,6 @@ const SignUp = () => {
             const user = result.user
             setError('');
             updateUserInfo(name, photoURL);
-            console.log(user);
             form.reset();
         })
         .catch(error => setError(error.message))
