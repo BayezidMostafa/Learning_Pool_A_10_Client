@@ -5,10 +5,10 @@ import { FaCaretSquareRight } from "react-icons/fa";
 const SideBar = ({ courses }) => {
     const [open, setOpen] = useState(false);
     return (
-        <div className=''>
-            <div style={{borderRadius: '0 0 5px 5px '}} className={`bg-purple-700 h-screen duration-500 p-5 pt-5 ${open ? "w-64" : "w-20"} `}>
+        <div className='relative'>
+            <div style={{borderRadius: '0 0 5px 5px '}} className={`bg-purple-700 h-74 duration-500 p-5 pt-5 ${open ? "w-64" : "w-20"} relative`}>
                 <FaCaretSquareRight className={`absolute -right-4 md:-right-8 text-purple-700 top-9 cursor-pointer text-xl md:text-4xl ${open && "rotate-180 duration-700 ease-in-out"}` } onClick={() => setOpen(!open)} />
-                <div className='mt-16'>
+                <div className=''>
                     {
                         courses.map(course => <div key={course.id}>
                             <div className='mb-7 bg-white rounded p-1'>

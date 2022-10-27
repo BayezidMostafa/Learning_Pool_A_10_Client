@@ -10,6 +10,8 @@ const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    console.log(user);
+
     const handleSignOut = () => {
         logOut()
             .then(() => { })
@@ -57,7 +59,7 @@ const NavBar = () => {
                             </li>
                             <li>
                                 <Link
-                                    to=""
+                                    to="/blog"
                                     aria-label="Blog"
                                     title="Blog"
                                     className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -75,7 +77,7 @@ const NavBar = () => {
 
                                     <>
                                         {
-                                            user?.photoURL ?
+                                            user.photoURL ?
                                                 <>
                                                     <Tippy content={user.displayName}>
                                                         <img src={user.photoURL} className="w-12 rounded-full" alt="" />
@@ -84,7 +86,7 @@ const NavBar = () => {
                                                 :
                                                 <>
                                                     <Tippy content={user.displayName}>
-                                                        <HiUserCircle className='text-5xl text-gray-300' />
+                                                        <HiUserCircle className='text-5xl text-gray-300 rounded-full' alt="" />
                                                     </Tippy>
                                                 </>
 
@@ -113,16 +115,6 @@ const NavBar = () => {
                                             className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                                         >
                                             Sign in
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link
-                                            to="/signup"
-                                            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-gray-900 hover:bg-gray-800"
-                                            aria-label="Sign up"
-                                            title="Sign up"
-                                        >
-                                            Sign up
                                         </Link>
                                     </li>
                                 </>
@@ -218,7 +210,7 @@ const NavBar = () => {
                                             </li>
                                             <li>
                                                 <Link
-                                                    to=""
+                                                    to="/blog"
                                                     aria-label="Product Blog"
                                                     title="Product Blog"
                                                     className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -227,7 +219,7 @@ const NavBar = () => {
                                                 </Link>
                                             </li>
                                             {
-                                                user?.uid ?
+                                                user.uid ?
                                                     <>
                                                         <>
 
@@ -242,7 +234,7 @@ const NavBar = () => {
                                                                         :
                                                                         <>
                                                                             <Tippy content={user.displayName}>
-                                                                                <HiUserCircle className='text-5xl text-gray-300' />
+                                                                                <HiUserCircle className='text-5xl text-gray-300 rounded-full' alt="" />
                                                                             </Tippy>
                                                                         </>
 
@@ -272,16 +264,6 @@ const NavBar = () => {
                                                                 className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                                                             >
                                                                 Sign in
-                                                            </Link>
-                                                        </li>
-                                                        <li>
-                                                            <Link
-                                                                to="signup"
-                                                                className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                                                                aria-label="Sign up"
-                                                                title="Sign up"
-                                                            >
-                                                                Sign up
                                                             </Link>
                                                         </li>
                                                     </>

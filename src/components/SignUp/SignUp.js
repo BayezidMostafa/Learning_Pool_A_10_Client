@@ -68,7 +68,7 @@ const SignUp = () => {
                     </div>
 
                 </div>
-                <label htmlFor="">{error}</label>
+                <label className='text-red-500' htmlFor="">{error}</label>
                 <button type="submit" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Create Account</button>
             </form>
         </div>
