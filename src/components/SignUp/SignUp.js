@@ -7,6 +7,7 @@ const SignUp = () => {
     const { createUser, updateTheUser } = useContext(AuthContext);
     const [error, setError] = useState('')
 
+    // Sign up
     const handleForm = event => {
         event.preventDefault();
         const form = event.target;

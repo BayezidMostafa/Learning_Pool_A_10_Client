@@ -1,6 +1,7 @@
 import { Button } from '@material-tailwind/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaHandPointRight } from "react-icons/fa";
 
 const Course = ({ singleCourse }) => {
     const { course_name, id, img, classes, duration } = singleCourse;
@@ -10,8 +11,8 @@ const Course = ({ singleCourse }) => {
             <div className='py-5 px-5'>
                 <p className='font-bold md:text-2xl'>{course_name}</p>
                 <div className='flex justify-between mt-5'>
-                    <p>Class: {classes}</p>
-                    <p>Duration: {duration} Min</p>
+                    <p className='flex items-center gap-1'><FaHandPointRight className='inline'/> Class: {classes}</p>
+                    <p className='flex items-center gap-1'><FaHandPointRight className='inline'/> Duration: {duration} Min</p>
                 </div>
             </div>
             <div className='text-center '>

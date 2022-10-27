@@ -12,7 +12,7 @@ const Home = () => {
                     <p className="mt-6 mb-8 text-lg sm:mb-12 xl:max-w-3xl text-white">We are really happy to have you! We are here to make your online learning experience exceptional! </p>
                     <div className="flex gap-5 flex-wrap justify-center">
                         <Link to='/courses'><Button ripple={true} variant="gradient" className='bg-white bg-opacity-10 hover:bg-opacity-5 py-4'>Get Started</Button></Link>
-                        <Button ripple={true} variant="gradient" className='bg-white bg-opacity-10 hover:bg-opacity-5 py-4'>Learn More</Button>
+                        <Link to='/faq'><Button ripple={true} variant="gradient" className='bg-white bg-opacity-10 hover:bg-opacity-5 py-4'>Learn More</Button></Link>
                     </div>
                 </div>
             </div>

@@ -8,8 +8,6 @@ const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    console.log(user);
-
     const handleSignOut = () => {
         logOut()
             .then(() => { })
@@ -69,6 +67,8 @@ const NavBar = () => {
                     </div>
                     {/* flex removed from here which was added by default */}
                     <ul className="items-center hidden space-x-8 lg:flex">
+
+                        {/* Conditional rendering for expanded navbar */}
                         {
                             user?.uid ?
                                 <>
@@ -138,7 +138,7 @@ const NavBar = () => {
                             className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
                             onClick={() => setIsMenuOpen(true)}
                         >
-                            <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
+                            <svg className="w-5 text-white" viewBox="0 0 24 24">
                                 <path
                                     fill="currentColor"
                                     d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
@@ -218,7 +218,8 @@ const NavBar = () => {
                                                     Blog
                                                 </Link>
                                             </li>
-                                            <Switch id="auto-update" />
+                                            <Switch className='bg-gray-300 checked:bg-black' id="auto-update" />
+                                            {/* Conditional rendering for Toggle Navbar */}
                                             {
                                                 user?.uid ?
                                                     <>
@@ -269,7 +270,7 @@ const NavBar = () => {
                                                         </li>
                                                     </>
                                             }
-                                            
+
                                         </ul>
 
                                     </nav>

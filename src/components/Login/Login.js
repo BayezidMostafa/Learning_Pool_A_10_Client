@@ -1,6 +1,7 @@
 import { Button } from '@material-tailwind/react';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthSource';
 
@@ -17,6 +18,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 navigate(from, { replace: true })
+                toast.success('Log in successful')
             })
             .catch(error => {
                 setError(error.message);
@@ -27,6 +29,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 navigate(from, { replace: true })
+                toast.success('Log in successful')
             })
             .catch(error => {
                 setError(error.message);
@@ -43,6 +46,7 @@ const Login = () => {
                 form.reset();
                 setError('')
                 navigate(from, { replace: true })
+                toast.success('Log in successful')
             })
             .catch(error => setError(error.message))
     }

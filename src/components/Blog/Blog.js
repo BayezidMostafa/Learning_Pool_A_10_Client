@@ -51,25 +51,25 @@ export const Blog = () => {
                 </div>
                 <div className="space-y-4 text-white">
                     <Item className="" title="what is cors?">
-                        <p className="text-white">
+                        <span className="text-white">
                             CORS stands for Cross Origin Resource Sharing. It is an HTTP-header based mechanism that allows a server to indicate any origins other than its own from which a browser should permit loading resources. For security reasons, browsers restrict cross origin HTTP requests initiated from scripts. For an example, XMLHttpRequest and the Fetch API follow the same origin policy. This means that a web application using those APIs can only request resources from the same origin the application was loaded from. Unless the response from other origins includes the right CORS headers.
-                        </p>
+                        </span>
                     </Item>
                     <Item className="" title="Why are you using firebase? What other options do you have to implement authentication?">
-                        <p className="text-white">
+                        <span className="text-white">
                             Firebase is very useful for a developer to develop their web applications. I am using firebase to use an authentication system for my website which is an important option for a website/web application. We can trust firebase to store our user data safely. Also, we can deploy/host our web application to the firebase. Some other options to get an authentication system without firebase: 1. Heroku, 2. Back4app, 3. Pubnub, 4. Backendless etc
-                        </p>
+                        </span>
                     </Item>
                     <Item className="" title="How does the private route work?">
-                        <p className="text-white">
+                        <span className="text-white">
                             The private route component renders the child component. If the user logged in then the child component will be rendered. If the user is not logged in, it will redirect the user to the log-in panel with the return URL passed in the location state property
-                        </p>
+                        </span>
                     </Item>
                     <Item className="" title="What is Node? How does Node work?">
-                        <p className="text-white">
+                        <span className="text-white">
                             Node.js is an open-source backend javascript runtime environment.
                             It is a used as backend service where javascript works on the server side of the application. This way javascript is used on both the front and backend. Node.js works on the chrome v8 engine which is convert javascript code into machine code, it is highly scalable, lightweight, fast, and data-intensive.
-                        </p>
+                        </span>
                     </Item>
                 </div>
             </div>

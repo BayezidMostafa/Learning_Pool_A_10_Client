@@ -6,9 +6,12 @@ import bg_image from '../all-bg.jpg'
 
 const Main = () => {
     return (
-        <div style={{backgroundImage: `url(${bg_image})`, backgroundSize:"cover" }} className=''>
+        <div style={{backgroundImage: `url(${bg_image})`, backgroundSize:"cover" }}>
+            {/* Common NavBar */}
             <NavBar />
+            {/* All other Child Components */}
             <Outlet />
+            {/* Common footers */}
             <Footer/>
 
         </div>
