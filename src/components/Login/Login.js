@@ -3,52 +3,73 @@ import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { RotateLoader } from 'react-spinners';
 import { AuthContext } from '../../context/AuthSource';
 
 const Login = () => {
     const { providerLogIn, signInUser } = useContext(AuthContext)
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/';
     const googleProvider = new GoogleAuthProvider();
     const githubProvider = new GithubAuthProvider();
     const handleGoogleLogIn = () => {
+        setLoading(true)
         providerLogIn(googleProvider)
             .then(result => {
+                setLoading(false)
                 const user = result.user;
                 navigate(from, { replace: true })
                 toast.success('Log in successful')
             })
             .catch(error => {
+                setLoading(false)
                 setError(error.message);
             })
     }
     const handleGithubLogIn = () => {
+        setLoading(true)
         providerLogIn(githubProvider)
             .then(result => {
+                setLoading(false)
                 const user = result.user;
                 navigate(from, { replace: true })
                 toast.success('Log in successful')
             })
             .catch(error => {
+                setLoading(false)
                 setError(error.message);
             })
     }
     const handleSignIn = event => {
+        setLoading(true)
         event.preventDefault()
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
         signInUser(email, password)
             .then(result => {
+                setLoading(false)
                 const user = result.user;
                 form.reset();
                 setError('')
                 navigate(from, { replace: true })
                 toast.success('Log in successful')
             })
-            .catch(error => setError(error.message))
+            .catch(error => {
+                setLoading(false)
+                setError(error.message)
+            })
+    }
+
+    if (loading) {
+        return (
+            <div className='min-h-[80vh] flex justify-center items-center'>
+                <RotateLoader color="#ffffff" />
+            </div>
+        )
     }
 
     return (
@@ -90,7 +111,14 @@ const Login = () => {
                     </div>
                 </div>
                 <div>
-                    <label className='text-red-600' htmlFor="">{error}</label>
+                    <label className='text-red-600' htmlFor="">
+                        {
+                            error ?
+                                <>
+                                    <p className='text-red-600 font-semibold'>Invalid Email or Password</p>
+                                </> : ''
+                        }
+                    </label>
                 </div>
                 <Button variant='text' type="form" className="w-full px-8 py-3 font-semibold  rounded-md bg-white bg-opacity-10 text-white">Sign in</Button>
             </form>

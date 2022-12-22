@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigation } from 'react-router-dom';
 import Pdf from "react-to-pdf";
 import { FaDownload, FaHandPointRight } from "react-icons/fa";
+import { RotateLoader } from 'react-spinners';
 
 
 const ref = React.createRef();
@@ -14,7 +15,15 @@ const options = {
 const CourseDetails = () => {
     const data = useLoaderData()
     const { about, course_name, cover_thumb, duration: time, mentor, price, id } = data;
-
+        
+    const navigation = useNavigation()
+    if (navigation.state === "loading") {
+        return (
+            <div className='min-h-[80vh] flex justify-center items-center'>
+                <RotateLoader color="#ffffff" />
+            </div>
+        )
+    }
 
     return (
         <div ref={ref} className="p-6 shadow-md bg-white bg-opacity-10 text-gray-100 md:container mx-auto my-5 rounded-md">

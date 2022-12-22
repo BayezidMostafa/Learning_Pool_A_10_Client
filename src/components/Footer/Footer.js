@@ -21,17 +21,23 @@ const Footer = () => {
                     </ul>
                 </div>
                 <ul className="flex flex-wrap pl-3 space-x-4 sm:space-x-8">
-                    <li className='flex flex-col items-center'>
-                        <Link className='text-3xl' to=''><FaInstagramSquare/></Link>
-                        <Link to=''>Instagram</Link>
+                    <li className=''>
+                        <a className='flex flex-col items-center' target='_blank' href="https://www.instagram.com/bayezid951.321/" rel='noreferrer'>
+                            <p className='text-3xl'><FaInstagramSquare /></p>
+                            <p>Instagram</p>
+                        </a>
                     </li>
-                    <li className='flex flex-col items-center'>
-                        <Link className='text-3xl' to=''><FaFacebookSquare /></Link>
-                        <Link to=''>Facebook</Link>
+                    <li className=''>
+                        <a className='flex flex-col items-center' target='_blank' href="https://www.facebook.com/dev.bayezid" rel='noreferrer'>
+                            <p className='text-3xl'><FaFacebookSquare /></p>
+                            <p to=''>Facebook</p>
+                        </a>
                     </li>
-                    <li className='flex flex-col items-center'>
-                        <Link className='text-3xl' to=''><FaTwitterSquare/></Link>
-                        <Link to=''>Twitter</Link>
+                    <li className=''>
+                        <a className='flex flex-col items-center' href="https://twitter.com/BayezidMostafa" rel='noreferrer'>
+                            <p className='text-3xl'><FaTwitterSquare /></p>
+                            <p>Twitter</p>
+                        </a>
                     </li>
                 </ul>
             </div>
