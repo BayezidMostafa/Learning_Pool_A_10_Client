@@ -32,7 +32,6 @@ const routes = createBrowserRouter([
             {
                 path: '/courses',
                 element: <Courses />,
-                loader: () => fetch('https://learning-pool-server-site.vercel.app/courses')
             },
             {
                 path: '/courses/:id',

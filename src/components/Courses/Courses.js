@@ -1,15 +1,28 @@
 import React from 'react';
-import { useLoaderData, useNavigation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { RotateLoader } from 'react-spinners';
 import Course from '../Course/Course';
 import SideBar from '../SideBar/SideBar';
 
 const Courses = () => {
-    const navigation = useNavigation()
-    console.log(navigation);
-    const courses = useLoaderData();
+    const [loading, setLoading] = useState(false)
+    const [courses, setCourses] = useState([])
+    
+    useEffect(() => {
+        setLoading(true)
+        fetch('https://learning-pool-server-site.vercel.app/courses')
+        .then(res => res.json())
+        .then(data => {
+            setLoading(false)
+            setCourses(data)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+    }, [])
 
-    if (navigation.state === 'loading') {
+    if (loading) {
         return (
             <div className='min-h-[80vh] flex justify-center items-center'>
                 <RotateLoader color="#ffffff" />
